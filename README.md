@@ -1,1 +1,1 @@
-# garage-api
+# garage_api
