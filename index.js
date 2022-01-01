@@ -4,6 +4,7 @@ const express = require('express'),
   methodOverride = require('method-override');
 const app = express();
 const wheel = String.fromCodePoint(0x1F697);
+const smoke = String.fromCodePoint(0x1F4A8);
 
 app.use(morgan('common'));
 app.use(express.static('public'));
@@ -89,5 +90,5 @@ app.post('/owners', (req, res) => {
 
 // listen for requests
 app.listen(8080, () => {
-  console.log(`The ${wheel} myGarage app is listening on port 8080.`);
+  console.log(`The ${wheel}${smoke} myGarage app is listening on port 8080.`);
 });
