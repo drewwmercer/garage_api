@@ -68,8 +68,21 @@ app.get('/vehicles', (req, res) => {
   res.json(topVehicles);
 });
 
+// Gets a list of all owners
 app.get('/owners', (req, res) => {
     res.json(starterOwners);
+  });
+
+// Gets the data about a single owner, by ownername
+app.get('/owners/:name', (req, res) => {
+    res.json(starterOwners.find((owner) =>
+      { return owner.ownername === req.params.name }));
+  });
+
+  // Gets the data about a single make, by brandname
+app.get('/vehicles/:name', (req, res) => {
+    res.json(topVehicles.find((brand) =>
+      { return vehicle.brandname === req.params.name }));
   });
 
 // POST requests
