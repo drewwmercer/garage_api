@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>myGarage API | Documentation</title>
+    <link rel="stylesheet" href="temp-style.css">
 </head>
 
 <body>
@@ -12,6 +13,54 @@
     <div>This is the server-side component of a "garage" web application. The web application will provide users with
         access to information about different vehicles, makes, modifications, and maintenance records. Owners will be
         able to sign up, update their personal information, and create a list of their vehicles.</div>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>CRUD Operation</th>
+                    <th>HTTP Request Method</th>
+                    <th>URL</th>
+                    <th>Request Description</th>
+                    <th>Data Format: Request Body</th>
+                    <th>Data Format: Response Body</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>READ</td>
+                    <td>GET</td>
+                    <td>'/vehicles'</td>
+                    <td>Return a list of ALL vehicles to the user</td>
+                    <td>N/A</td>
+                    <td>A JSON object holding data about all vehicles</td>
+                </tr>
+                <tr>
+                    <td>CREATE</td>
+                    <td>POST</td>
+                    <td>'/owners'</td>
+                    <td>Allow new owners to register</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
 </body>
 
 </html>
