@@ -180,14 +180,14 @@ app.post('/owners/:ownername/:vehicleid', passport.authenticate('jwt',{session: 
 
 // DELETE requests
 // Deleting an owner
-app.delete('/owners/:Nickname', passport.authenticate('jwt',{session: false}),
+app.delete('/owners/:Ownername', passport.authenticate('jwt',{session: false}),
 (req,res) =>{
-    Owners.findOneAndRemove({Nickname: req.params.Nickname})
+    Owners.findOneAndRemove({Ownername: req.params.Ownername})
       .then((owner) => {
           if (!owner) {
-              res.status(400).send(req.params.Nickname + ' was not found.');
+              res.status(400).send(req.params.Ownername + ' was not found.');
           } else {
-              res.status(200).send(req.params.Nickname +' was deleted.');
+              res.status(200).send(req.params.Ownername +' was deleted.');
           }
       })
       .catch((err) =>{
