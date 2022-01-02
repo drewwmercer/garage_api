@@ -167,7 +167,7 @@ app.post('/vehicles',[
 app.post('/owners/:ownername/:vehicleid', (req, res) => {
   const { ownername, vehicleid } = req.params;
 
-  let owner = Owners.find( owner => owner.ownername == ownername);
+  let owner = Owners.find( owner => owner.Ownername == ownername);
 
   if(owner) {
       owner.Vehicles.push(vehicleid);
