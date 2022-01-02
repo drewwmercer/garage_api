@@ -1,10 +1,19 @@
 const express = require('express'),
   morgan = require('morgan'),
   bodyParser = require('body-parser'),
-  methodOverride = require('method-override');
+  methodOverride = require('method-override'),
+  mongoose = require('mongoose'),
+  Models = require('./models.js');
 const app = express();
 const wheel = String.fromCodePoint(0x1F697);
 const smoke = String.fromCodePoint(0x1F4A8);
+
+const Vehicles = Models.Vehicle;
+const Owners = Models.Owner;
+
+let auth = require('./auth.js')(app);
+const passport = require('passport');
+require('./passport.js');
 
 app.use(morgan('common'));
 app.use(express.static('public'));
@@ -64,8 +73,21 @@ app.get('/documentation', (err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-app.get('/vehicles', (req, res) => {
-  res.json(topVehicles);
+// app.get('/vehicles', (req, res) => {
+//   Vehicles.find().then((vehicles)) => {
+//     res.status(201).json(movies);
+// });
+
+app.get('/vehicles', passport.authenticate('jwt',{session: false}),
+(req,res)=>{
+    Vehicles.find()
+    .then((vehicles) => {
+        res.status(201).json(vehicles);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: '+ err);
+    });
 });
 
 // Gets a list of all owners

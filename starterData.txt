@@ -1,0 +1,23 @@
+var vehicle1 = {
+  Nickname: "99 Civic Si",
+  Make: "Honda",
+  Year: 1999,
+  Model: "Civic",
+  Trim: "Si",
+  Modifications: {
+    Engine: "Injen Cold Air Intake",
+    Suspension: "Koni Yellow Shock Absorbers"
+  }
+}
+
+db.vehicles.insertOne(vehicle1)
+
+var owner1 = {
+  Ownername: "firstDriver",
+  Password: "12345678",
+  Email: "test1@test.com",
+  DOB: "",
+  Vehicles: {}
+}
+
+db.owners.insertOne(owner1)
