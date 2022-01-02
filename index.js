@@ -32,42 +32,6 @@ app.use(express.static('public'));
 
 app.use(methodOverride());
 
-let topVehicles = [
-  {
-    nickname: '2020 Gladiator Rubicon - Firecracker Red',
-    make: 'Jeep',
-    year: '2020',
-    model: 'Gladiator',
-    trim: 'Rubicon',
-    latestmilecount: 22222,
-    latestmiledate: '01012022'
-  },
-  {
-    nickname: '2009 Ninja 250R',
-    make: 'Kawasaki'
-  },
-  {
-    nickname: '2019 Slingshot SLR',
-    make: 'Polaris'
-  }
-];
-
-let starterOwners = [
-    {
-      ownername: 'firstDriver',
-      password: 'test1pass',
-      vehicles: {}
-    },
-    {
-        ownername: 'secondDriver',
-        password: 'test1pass'
-    },
-    {
-        ownername: 'thirdDriver',
-        password: 'test1pass'
-    }
-  ];
-
 // GET requests
 app.get('/', (req, res) => {
   res.send('Welcome to myGarage!');
@@ -198,6 +162,20 @@ app.post('/vehicles',[
           res.status(500).send('Error: ' + error);
       })
   })  
+
+// Assign a vehicle to an owner  
+app.post('/owners/:ownername/:vehicleid', (req, res) => {
+  const { ownername, vehicleid } = req.params;
+
+  let owner = Owners.find( owner => owner.ownername == ownername);
+
+  if(owner) {
+      owner.Vehicles.push(vehicleid);
+      res.status(200).json(owner);
+  } else {
+      res.status(400).send('Owner not found.')
+  }
+})
 
 // DELETE requests
 
