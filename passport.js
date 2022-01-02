@@ -8,7 +8,7 @@ let Owners = Models.Owner,
     ExtractJWT = passportJWT.ExtractJwt;
 
  passport.use(new LocalStrategy({
-     ownernameField: 'Ownername',
+     usernameField: 'Ownername',
      passwordField: 'Password'},
      (ownername, password, callback) => {
          console.log(ownername + '' + password);
