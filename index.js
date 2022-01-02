@@ -8,14 +8,14 @@ const express = require('express'),
 mongoose.connect('mongodb://localhost:27017/myGarage',{useNewUrlParser: true, useUnifiedTopology: true})
 
 const app = express();
-const wheel = String.fromCodePoint(0x1F697);
-const smoke = String.fromCodePoint(0x1F4A8);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+const wheel = String.fromCodePoint(0x1F697), 
+    smoke = String.fromCodePoint(0x1F4A8);
 
 const Vehicles = Models.Vehicle;
 const Owners = Models.Owner;
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 
 const {check, validationResult} = require ('express-validator');
 
@@ -29,11 +29,6 @@ require('./passport.js');
 app.use(morgan('common'));
 app.use(express.static('public'));
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
-app.use(bodyParser.json());
 app.use(methodOverride());
 
 let topVehicles = [
@@ -84,11 +79,6 @@ app.get('/documentation', (err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-// app.get('/vehicles', (req, res) => {
-//   Vehicles.find().then((vehicles)) => {
-//     res.status(201).json(movies);
-// });
-
 app.get('/vehicles', passport.authenticate('jwt',{session: false}),
 (req,res)=>{
     Vehicles.find()
@@ -103,7 +93,14 @@ app.get('/vehicles', passport.authenticate('jwt',{session: false}),
 
 // Gets a list of all owners
 app.get('/owners', (req, res) => {
-    res.json(starterOwners);
+    Owners.find()
+    .then((owners) => {
+        res.status(201).json(owners);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
   });
 
 // Gets the data about a single owner, by ownername
