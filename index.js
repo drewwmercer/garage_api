@@ -179,9 +179,20 @@ app.post('/owners/:ownername/:vehicleid', passport.authenticate('jwt',{session: 
 });
 
 // DELETE requests
-
-// listen for requests
-const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0',() => {
- console.log(`The ${wheel}${smoke} myGarage app is listening on Port ${port}.`);
-});
+// Deleting an owner
+app.delete('/owners/:Nickname', passport.authenticate('jwt',{session: false}),
+(req,res) =>{
+    Owners.findOneAndRemove({Nickname: req.params.Nickname})
+      .then((owner) => {
+          if (!owner) {
+              res.status(400).send(req.params.Nickname + ' was not found.');
+          } else {
+              res.status(200).send(req.params.Nickname +' was deleted.');
+          }
+      })
+      .catch((err) =>{
+          console.error(err);
+          res.status(500).send ('Error: '+ err);
+      }
+      )
+    });
