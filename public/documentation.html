@@ -39,7 +39,7 @@
                     <td>POST</td>
                     <td>'/owners'</td>
                     <td>Allow new owners to register</td>
-                    <td>A JSON object holding data about the owner to add, structured like:<br>{<br>&emsp;ownername: 'baby_driver',<br>&emsp;password: 123456abc!<br>}</td>
+                    <td>A JSON object holding data about the owner to add, structured like:<br>{<br>&emsp;"Ownername": "baby_driver",<br>&emsp;"Password": "123456abc!"<br>}</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -48,14 +48,14 @@
                     <td>'/owners'</td>
                     <td>Return a list of ALL owners to the user</td>
                     <td>N/A</td>
-                    <td>A JSON object holding data about all vehicles in the garage, structured like:<br>{<br>&emsp;nickname: '2022 Cadillac Lyriq',<br>&emsp;year: '2022',<br>&emsp;make: 'Cadillac'<br>}</td>
+                    <td>A JSON object holding data about all vehicles in the garage, structured like:<br>{<br>&emsp;"Nickname": "2022 Cadillac Lyriq",<br>&emsp;"Year": "2022",<br>&emsp;"Make": "Cadillac"<br>}</td>
                 </tr>
                 <tr>
                     <td>CREATE</td>
                     <td>POST</td>
                     <td>'/vehicles'</td>
                     <td>Allow new vehicles to be added to the garage</td>
-                    <td>A JSON object holding data about the vehicle to add, structured like:<br>{<br>&emsp;"Nickname": "Eleanor",<br>&emsp;"Year": 1967,<br>&emsp;"Trim": "Shelby GT500"<br>}</td>
+                    <td>A JSON object holding data about the vehicle to add, structured like:<br>{<br>&emsp;"Nickname": "Eleanor",<br>&emsp;"Year": "1967",<br>&emsp;"Trim": "Shelby GT500"<br>}</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -99,12 +99,12 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>CREATE</td>
+                    <td>POST</td>
+                    <td>'/owners/:Ownername/:VehicleID'</td>
                     <td>Allow owners to add a vehicle to their list of vehicles (showing only a text that a vehicle has been added)</td>
                     <td></td>
-                    <td></td>
+                    <td>A JSON object holding data about the owner with the new vehicle ID included in the Vehicles array, structured like:<br>{<br>&emsp;"Ownername": "baby_driver",<br>&emsp;"Password": "123456abc!"<br>&emsp;"Vehicles": "61d11668c6faff8e75486a5c"<br>}</td>
                 </tr>
                 <tr>
                     <td>DELETE</td>
