@@ -119,18 +119,40 @@ app.get('/vehicles/:name', (req, res) => {
   });
 
 // POST requests
-app.post('/owners', (req, res) => {
-    let newOwner = req.body;
-  
-    if (!newOwner.username) {
-      const message = 'Missing "username" in request body';
-      res.status(400).send(message);
-    } else {
-        newOwner.id = uuid.v4();
-      owners.push(newOwner);
-      res.status(201).send(newOwner);
-    }
-  });
+// Add a new owner
+app.post('/owners',[
+    check('Ownername', 'Ownername is required').isLength({min:4}),
+    check('Ownername', 'Ownername cannot contain non alphanumeric characters.').isAlphanumeric(),
+    check('Password', 'Password is required.').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid.').isEmail()
+],
+(req,res) =>{
+    let errors = validationResult(req);
+      if(!errors.isEmpty()){return res.status(422).json({errors: errors.array()
+   })
+       }
+    let hashedPassword = Owners.hashPassword(req.body.Password);
+    Owners.findOne({Ownername: req.body.Ownername}).then(
+        (owner) =>{
+            if(owner){
+                return res.status(400).send(req.body.Ownername + ' already exists');
+            } else {Owners.create({
+                Ownername: req.body.Ownername,
+                Password: hashedPassword, 
+                Email: req.body.Email,
+                DOB: req.body.DOB
+            })
+            .then ((owner) => {res.status(201).json(owner)}
+            ).catch((error) => {console.error(error);
+              res.status(500).send ('Error: ' + error);
+          }) 
+        }
+      })
+      .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+      })
+  })
 
 // DELETE requests
 
