@@ -202,3 +202,9 @@ app.delete('/owners/:Ownername', passport.authenticate('jwt', { session: false }
             }
             )
     });
+    
+// listen for requests
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+ console.log(`The ${wheel}${smoke} myGarage app is listening on Port ${port}.`);
+});
