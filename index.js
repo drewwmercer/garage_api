@@ -4,12 +4,23 @@ const express = require('express'),
   methodOverride = require('method-override'),
   mongoose = require('mongoose'),
   Models = require('./models.js');
+
+mongoose.connect('mongodb://localhost:27017/myGarage',{useNewUrlParser: true, useUnifiedTopology: true})
+
 const app = express();
 const wheel = String.fromCodePoint(0x1F697);
 const smoke = String.fromCodePoint(0x1F4A8);
 
 const Vehicles = Models.Vehicle;
 const Owners = Models.Owner;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+const {check, validationResult} = require ('express-validator');
+
+const cors = require('cors');
+app.use(cors()); 
 
 let auth = require('./auth.js')(app);
 const passport = require('passport');
