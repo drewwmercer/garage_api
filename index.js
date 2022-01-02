@@ -5,7 +5,8 @@ const express = require('express'),
   mongoose = require('mongoose'),
   Models = require('./models.js');
 
-mongoose.connect('mongodb://localhost:27017/myGarage',{useNewUrlParser: true, useUnifiedTopology: true})
+// mongoose.connect('mongodb://localhost:27017/myGarage',{useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.CONNECTION_URI,{useNewUrlParser: true, useUnifiedTopology: true})
 
 const app = express();
 app.use(bodyParser.json());
