@@ -45,10 +45,18 @@
                 <tr>
                     <td>READ</td>
                     <td>GET</td>
-                    <td>'/vehicles'</td>
+                    <td>'/owners'</td>
                     <td>Return a list of ALL owners to the user</td>
                     <td>N/A</td>
                     <td>A JSON object holding data about all vehicles in the garage, structured like:<br>{<br>&emsp;nickname: '2022 Cadillac Lyriq',<br>&emsp;year: '2022',<br>&emsp;make: 'Cadillac'<br>}</td>
+                </tr>
+                <tr>
+                    <td>CREATE</td>
+                    <td>POST</td>
+                    <td>'/vehicles'</td>
+                    <td>Allow new vehicles to be added to the garage</td>
+                    <td>A JSON object holding data about the vehicle to add, structured like:<br>{<br>&emsp;"Nickname": "Eleanor",<br>&emsp;"Year": 1967,<br>&emsp;"Trim": "Shelby GT500"<br>}</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -107,8 +115,8 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td>DELETE</td>
+                    <td>DELETE</td>
                     <td></td>
                     <td>Allow existing owners to deregister (showing only a text that an owner email has been removed)</td>
                     <td></td>
