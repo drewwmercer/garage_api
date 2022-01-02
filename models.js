@@ -10,7 +10,7 @@ let vehicleSchema = mongoose.Schema({
     Model: {type: String, required:true},
     Trim: {type: String, required:true},
     BodyType:{
-        Name: String,
+        BodyName: String,
         Description: String
     },
     Make:{

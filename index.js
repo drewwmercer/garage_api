@@ -151,6 +151,53 @@ app.post('/owners',[
       })
   })
 
+// Add a new vehicle
+app.post('/vehicles',[
+    // check('Ownername', 'Ownername is required').isLength({min:4}),
+    // check('Ownername', 'Ownername cannot contain non alphanumeric characters.').isAlphanumeric(),
+    // check('Password', 'Password is required.').not().isEmpty(),
+    // check('Email', 'Email does not appear to be valid.').isEmail()
+],
+(req,res) =>{
+    let errors = validationResult(req);
+      if(!errors.isEmpty()){return res.status(422).json({errors: errors.array()
+   })
+       }
+    // let hashedPassword = Owners.hashPassword(req.body.Password);
+    Vehicles.findOne({Nickname: req.body.Nickname}).then(
+        (vehicle) =>{
+            if(vehicle){
+                return res.status(400).send(req.body.Nickname + ' already exists');
+            } else {Vehicles.create({
+                Nickname: req.body.Nickname,
+                Description: req.body.Description,
+                Year: req.body.Year,
+                Model: req.body.Model,
+                Trim: req.body.Trim,
+                BodyType: {
+                    Name: req.body.BodyType.BodyName,
+                    Description: req.body.BodyType.Description
+                },
+                Make: {
+                    BrandName: req.body.Make.BrandName
+                },
+                Modifications: {
+                    Description: req.body.Modifications.Description,
+                },
+                Active: req.body.Active
+            })
+            .then ((vehicle) => {res.status(201).json(vehicle)}
+            ).catch((error) => {console.error(error);
+              res.status(500).send ('Error: ' + error);
+          }) 
+        }
+      })
+      .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+      })
+  })  
+
 // DELETE requests
 
 // listen for requests
