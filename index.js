@@ -164,18 +164,19 @@ app.post('/vehicles',[
   })  
 
 // Assign a vehicle to an owner  
-app.post('/owners/:ownername/:vehicleid', (req, res) => {
-  const { ownername, vehicleid } = req.params;
-
-  let owner = Owners.find( owner => owner.Ownername == ownername);
-
-  if(owner) {
-      owner.Vehicles.push(vehicleid);
-      res.status(200).json(owner);
-  } else {
-      res.status(400).send('Owner not found.')
-  }
-})
+app.post('/owners/:ownername/:vehicleid', passport.authenticate('jwt',{session: false}), (req, res) => {
+ Owners.findOneAndUpdate({Ownername: req.params.ownername}, {
+     $push: {Vehicles: req.params.vehicleid}
+ },
+ {new:true},
+ (err, owner) => {
+     if (err) {
+        res.status(400).send('Owner not found.')
+     } else {
+        res.status(200).json(owner);
+     }
+ });
+});
 
 // DELETE requests
 
