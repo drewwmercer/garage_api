@@ -14,7 +14,7 @@ let vehicleSchema = mongoose.Schema({
         Description: String
     },
     // Make: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Make' }],
-    Make: makeSchema,
+    Make: [{ makeSchema }],
     Maintenance: {
         Description: String,
     },
