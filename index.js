@@ -74,8 +74,15 @@ app.get('/owners/:name', (req, res) => {
 });
 
 // Gets the data about a single make, by brandname
-app.get('/vehicles/:name', (req, res) => {
-    res.json(topVehicles.find((brand) => { return vehicle.brandname === req.params.name }));
+app.get('/vehicles/make/:make', passport.authenticate('jwt',{ session: false }), (req, res) => {
+    Vehicles.find({'Make.BrandName': req.params.make})
+    .then((brandName) =>{
+        res.json(brandName);
+    })
+    .catch((err) =>{
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });  
 });
 
 // POST requests
@@ -202,7 +209,7 @@ app.delete('/owners/:Ownername', passport.authenticate('jwt', { session: false }
             }
             )
     });
-    
+
 // listen for requests
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
