@@ -13,8 +13,7 @@ let vehicleSchema = mongoose.Schema({
         BodyName: String,
         Description: String
     },
-    // Make: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Make' }],
-    Make: [{ makeSchema }],
+    Make: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Make' }],
     Maintenance: {
         Description: String,
     },
