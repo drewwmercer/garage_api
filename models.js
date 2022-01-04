@@ -13,12 +13,7 @@ let vehicleSchema = mongoose.Schema({
         BodyName: String,
         Description: String
     },
-    Make:{
-        BrandName: String, 
-        About: String,
-        YearFounded: Date,
-        YearEnded: Date
-    },
+    Make: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Make' }],
     Maintenance: {
         Description: String,
     },
@@ -38,6 +33,13 @@ let ownerSchema = mongoose.Schema({
     [{ type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle'}]
 });
 
+let makeSchema = mongoose.Schema({
+    BrandName:{type: String, required: true},
+    About: {type: String, required: true},
+    YearFounded: Date, 
+    YearEnded: Date
+});
+
 //Hashing the owner's password
 ownerSchema.statics.hashPassword = (password) => {
     return bcrypt.hashSync(password, 10)
@@ -49,8 +51,9 @@ ownerSchema.methods.validatePassword = function (password) {
 };
 
 let Vehicle = mongoose.model('Vehicle', vehicleSchema);
-
 let Owner = mongoose.model('Owner', ownerSchema);
+let Make = mongoose.model('Make', makeSchema)
 
 module.exports.Vehicle = Vehicle; 
 module.exports.Owner = Owner;
+module.exports.Make = Make;

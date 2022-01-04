@@ -17,6 +17,7 @@ const wheel = String.fromCodePoint(0x1F697),
 
 const Vehicles = Models.Vehicle;
 const Owners = Models.Owner;
+const Makes = Models.Make;
 
 const { check, validationResult } = require('express-validator');
 
@@ -73,7 +74,7 @@ app.get('/owners/:name', (req, res) => {
     res.json(starterOwners.find((owner) => { return owner.ownername === req.params.name }));
 });
 
-// Gets the data about a single make, by brandname
+// Gets the list of cars from a single make, by brandname
 app.get('/vehicles/make/:make', passport.authenticate('jwt',{ session: false }), (req, res) => {
     Vehicles.find({'Make.BrandName': req.params.make})
     .then((brandName) =>{
