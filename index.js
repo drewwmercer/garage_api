@@ -86,6 +86,18 @@ app.get('/vehicles/make/:make', passport.authenticate('jwt',{ session: false }),
     });  
 });
 
+// Gets details for a single make, by brandname
+app.get('/makes/:make', passport.authenticate('jwt',{ session: false }), (req, res) => {
+    Makes.findOne({'BrandName': req.params.make})
+    .then((brandName) =>{
+        res.json(brandName);
+    })
+    .catch((err) =>{
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });  
+});
+
 // POST requests
 // Add a new owner
 app.post('/owners', [
