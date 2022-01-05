@@ -75,8 +75,8 @@ app.get('/owners/:name', (req, res) => {
 });
 
 // Gets the list of cars from a single make, by brandname
-app.get('/vehicles/make/:make', passport.authenticate('jwt',{ session: false }), (req, res) => {
-    Vehicles.find({Make.BrandName: req.params.make})
+app.get('/vehicles/:make', passport.authenticate('jwt',{ session: false }), (req, res) => {
+    Vehicles.find({'Make.BrandName': req.params.make})
     .then((brandName) =>{
         res.json(brandName);
     })
