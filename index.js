@@ -34,10 +34,12 @@ app.use(express.static('public'));
 app.use(methodOverride());
 
 // GET requests
+// Main sanity check to make sure app is responding
 app.get('/', (req, res) => {
     res.send('Welcome to myGarage!');
 });
 
+// API documentation resource
 app.get('/documentation', (err, req, res, next) => {
     res.sendFile('public/documentation.html', { root: __dirname });
 
@@ -45,6 +47,7 @@ app.get('/documentation', (err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
+// Get a list of all vehicles
 app.get('/vehicles', passport.authenticate('jwt', { session: false }),
     (req, res) => {
         Vehicles.find()
