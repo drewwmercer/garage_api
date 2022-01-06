@@ -5,8 +5,8 @@ const express = require('express'),
     mongoose = require('mongoose'),
     Models = require('./models.js');
 
-// mongoose.connect('mongodb://localhost:27017/myGarage',{useNewUrlParser: true, useUnifiedTopology: true})
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/myGarage',{useNewUrlParser: true, useUnifiedTopology: true})
+// mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const app = express();
 app.use(bodyParser.json());
@@ -225,6 +225,24 @@ app.delete('/owners/:Ownername', passport.authenticate('jwt', { session: false }
             }
             )
     });
+
+// Deleting a vehicle
+app.delete('/vehicles/:Nickname', passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Vehicles.findOneAndRemove({ Nickname: req.params.Nickname })
+            .then((vehicle) => {
+                if (!vehicle) {
+                    res.status(400).send(req.params.Nickname + ' was not found.');
+                } else {
+                    res.status(200).send(req.params.Nickname + ' was deleted.');
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                res.status(500).send('Error: ' + err);
+            }
+            )
+    });    
 
 // listen for requests
 const port = process.env.PORT || 8080;
