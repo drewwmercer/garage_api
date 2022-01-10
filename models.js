@@ -20,7 +20,8 @@ let vehicleSchema = mongoose.Schema({
     Modifications: {
         Description: String,
     },
-    Active: Boolean
+    Active: Boolean,
+    ImagePath: String
 });
 
 // Owner Schema
@@ -30,14 +31,16 @@ let ownerSchema = mongoose.Schema({
     Email: {type: String, required: true},
     DOB: Date, 
     Vehicles: 
-    [{ type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle'}]
+    [{ type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle'}],
+    ImagePath: String
 });
 
 let makeSchema = mongoose.Schema({
     BrandName:{type: String, required: true},
     About: {type: String, required: true},
     YearFounded: Date, 
-    YearEnded: Date
+    YearEnded: Date,
+    ImagePath: String
 });
 
 //Hashing the owner's password
