@@ -4,7 +4,6 @@ const mongoose = require('mongoose'),
 // Vehicle Schema
 let vehicleSchema = mongoose.Schema({
     Nickname: {type: String, required:true},
-    MainImage: String,
     Description: String,
     Year: {type: Date, required:true},
     Model: {type: String, required:true},
