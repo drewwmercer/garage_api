@@ -60,6 +60,19 @@ app.get('/vehicles', passport.authenticate('jwt', { session: false }),
             });
     });
 
+// Get data on a specific vehicle, by Nickname
+app.get('/vehicles/:Nickname', passport.authenticate('jwt', { session: false }),
+(req, res) => {
+    Vehicles.findOne({ Nickname: req.params.Nickname })
+        .then((vehicle) => {
+            res.json(vehicle);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+});    
+
 // Gets a list of all owners
 app.get('/owners', (req, res) => {
     Owners.find()
