@@ -48,9 +48,7 @@ app.get('/documentation', (err, req, res, next) => {
 });
 
 // Get a list of all vehicles
-// Removing authentication while buildng the React views
-// app.get('/vehicles', passport.authenticate('jwt', { session: false }),
-app.get('/vehicles',
+app.get('/vehicles', passport.authenticate('jwt', { session: false }),
     (req, res) => {
         Vehicles.find()
             .then((vehicles) => {
