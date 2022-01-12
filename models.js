@@ -14,7 +14,7 @@ let vehicleSchema = mongoose.Schema({
     },
     Make: { 
         BrandName:{type: String, required: true},
-        About: type: String,
+        About: String,
         YearFounded: Date, 
         YearEnded: Date,
         ImagePath: String
