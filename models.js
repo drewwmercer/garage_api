@@ -12,7 +12,13 @@ let vehicleSchema = mongoose.Schema({
         BodyName: String,
         Description: String
     },
-    Make: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Make' }],
+    Make: { 
+        BrandName:{type: String, required: true},
+        About: {type: String, required: true},
+        YearFounded: Date, 
+        YearEnded: Date,
+        ImagePath: String
+    },
     Maintenance: {
         Description: String,
     },
