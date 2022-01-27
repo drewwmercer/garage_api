@@ -58,7 +58,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 /**
  * @swagger
- * /
+ * /:
  * get: 
  *  description: Use as a main sanity check to make sure api app is responding
  *  responses: 
