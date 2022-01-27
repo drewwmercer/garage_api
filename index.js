@@ -41,8 +41,7 @@ const swaggerOptions = {
             description: "myGarage API Information",
             contact: {
                 name: "Drew Mercer"
-            },
-            servers: ["https://my-garage-application.herokuapp.com/"]
+            }
         }
     },
     apis: ["index.js"]
