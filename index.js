@@ -132,7 +132,15 @@ app.get('/vehicles/make/:make', passport.authenticate('jwt',{ session: false }),
     });  
 });
 
-// Gets details for a single make, by brandname
+/**
+ * @swagger
+ * /makes/:make:
+ *  get: 
+ *      description: Gets details for a single make, by brandname
+ *      responses: 
+ *          '200':
+ *              description: A successful response
+ */
 app.get('/makes/:make', passport.authenticate('jwt',{ session: false }), (req, res) => {
     Makes.findOne({'BrandName': req.params.make})
     .then((brandName) =>{
