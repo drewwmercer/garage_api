@@ -59,11 +59,11 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 /**
  * @swagger
  * /:
- * get: 
- *  description: Use as a main sanity check to make sure api app is responding
- *  responses: 
- *      '200':
- *          description: A successful response
+ *  get: 
+ *      description: Use as a main sanity check to make sure api app is responding
+ *      responses: 
+ *          '200':
+ *              description: A successful response
  */
 app.get('/', (req, res) => {
     res.send('Welcome to myGarage!');
