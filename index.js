@@ -33,6 +33,25 @@ app.use(express.static('public'));
 
 app.use(methodOverride());
 
+// Swagger integration
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: "myGarage API",
+            description: "myGarage API Information",
+            contact: {
+                name: "Drew Mercer"
+            },
+            servers: ["https://my-garage-application.herokuapp.com/"]
+        }
+    },
+    apis: ["index.js"]
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// Routes
 // GET requests
 // Main sanity check to make sure app is responding
 app.get('/', (req, res) => {
